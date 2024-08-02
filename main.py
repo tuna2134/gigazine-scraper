@@ -44,5 +44,5 @@ for i in range(100):
     data["last"] = url
     data["contents"].extend([{"title": article.title, "label": article.label} for article in articles])
     with open("data.json", "w") as f:
-        json.dump(data, f)
-    time.sleep(5)
+        json.dump(data, f, ensure_ascii=False, indent=4)
+    # time.sleep(5)
