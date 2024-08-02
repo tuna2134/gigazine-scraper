@@ -5,6 +5,7 @@ from dataclasses import dataclass
 
 from typing import Tuple
 import time
+from os.path import isfile
 
 
 labels = []
@@ -31,16 +32,17 @@ def get_articles(url: str) -> Tuple[Article, str]:
     return (articles, next_page.find("a").get("href"))
 
 
-data = []
+if isfile("data.json"):
+    with open("data.json", "r") as f:
+        data = json.load(f)
+else:
+    data = {"last": "https://gigazine.net/", "contents": []}
 
 
-url = "https://gigazine.net/"
 for i in range(100):
-    articles, url = get_articles(url)
-    print(url)
-    data.extend([{"title": article.title, "label": article.label} for article in articles])
+    articles, url = get_articles(data["last"])
+    data["last"] = url
+    data["contents"].extend([{"title": article.title, "label": article.label} for article in articles])
+    with open("data.json", "w") as f:
+        json.dump(data, f)
     time.sleep(5)
-
-
-with open("data.json", "w") as f:
-    json.dump(data, f)
