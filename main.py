@@ -39,7 +39,7 @@ for i in range(100):
     articles, url = get_articles(url)
     print(url)
     data.extend([{"title": article.title, "label": article.label} for article in articles])
-    time.sleep(1)
+    time.sleep(5)
 
 
 with open("data.json", "w") as f:
