@@ -18,8 +18,13 @@ class Article:
 
 def get_articles(url: str) -> Tuple[Article, str]:
     res = requests.get(url, headers={
-        "Content-Type": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Safari/605.1.15"
+        "Content-Type": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
+    }, proxies={
+        "https": "https://proxy2.d1.rspsrv.jp:26024"
     })
+    print(res.headers)
+    print(res.raise_for_status())
+    
     soup = BeautifulSoup(res.text, "html.parser")
 
     articles = []
