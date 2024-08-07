@@ -39,7 +39,7 @@ else:
     data = {"last": "https://gigazine.net/", "contents": []}
 
 
-for i in range(100):
+for i in range(2000):
     articles, url = get_articles(data["last"])
     data["last"] = url
     data["contents"].extend([{"title": article.title, "label": article.label} for article in articles])
