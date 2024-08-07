@@ -1,9 +1,9 @@
 import csv
-import json
+import orjson
 
 
 with open("data.json", "r") as f:
-    data = json.load(f)["contents"]
+    data = orjson.loads(f.read())["contents"]
 
 
 labels = []
